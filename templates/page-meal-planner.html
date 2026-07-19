@@ -1,0 +1,93 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"fit-pal-dashboard","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<main class="wp-block-group fit-pal-dashboard" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--70)">
+
+	<!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|60"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+	<div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--60)">
+		<!-- wp:paragraph {"style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.08em","fontWeight":"600"}},"textColor":"accent","fontSize":"small"} -->
+		<p class="has-accent-color has-text-color has-small-font-size" style="font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Meal Planner</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:post-title {"level":1,"fontSize":"xx-large"} /-->
+
+		<!-- wp:paragraph {"textColor":"contrast-muted"} -->
+		<p class="has-contrast-muted-color has-text-color">Your weekly dashboard for macros, recipes, and shopping lists. Drop interactive blocks or shortcodes into the panels below.</p>
+		<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:group -->
+
+	<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|50"}}}} -->
+	<div class="wp-block-columns">
+		<!-- wp:column {"width":"66.66%"} -->
+		<div class="wp-block-column" style="flex-basis:66.66%">
+			<!-- wp:group {"className":"fit-pal-dashboard__panel","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
+			<div class="wp-block-group fit-pal-dashboard__panel" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
+				<!-- wp:heading {"level":2,"fontSize":"large"} -->
+				<h2 class="wp-block-heading has-large-font-size">This week’s board</h2>
+				<!-- /wp:heading -->
+
+				<!-- wp:paragraph {"textColor":"contrast-muted","fontSize":"small"} -->
+				<p class="has-contrast-muted-color has-text-color has-small-font-size">Primary planner surface — place your meal board block, calendar, or app embed here.</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:spacer {"height":"280px"} -->
+				<div style="height:280px" aria-hidden="true" class="wp-block-spacer"></div>
+				<!-- /wp:spacer -->
+
+				<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+			</div>
+			<!-- /wp:group -->
+		</div>
+		<!-- /wp:column -->
+
+		<!-- wp:column {"width":"33.33%"} -->
+		<div class="wp-block-column" style="flex-basis:33.33%">
+			<!-- wp:group {"className":"fit-pal-dashboard__panel","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"},"margin":{"bottom":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
+			<div class="wp-block-group fit-pal-dashboard__panel" style="margin-bottom:var(--wp--preset--spacing--50);padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
+				<!-- wp:heading {"level":3,"fontSize":"large"} -->
+				<h3 class="wp-block-heading has-large-font-size">Macro targets</h3>
+				<!-- /wp:heading -->
+
+				<!-- wp:paragraph {"textColor":"contrast-muted","fontSize":"small"} -->
+				<p class="has-contrast-muted-color has-text-color has-small-font-size">Protein / carbs / fats summary panel.</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:spacer {"height":"120px"} -->
+				<div style="height:120px" aria-hidden="true" class="wp-block-spacer"></div>
+				<!-- /wp:spacer -->
+			</div>
+			<!-- /wp:group -->
+
+			<!-- wp:group {"className":"fit-pal-dashboard__panel","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
+			<div class="wp-block-group fit-pal-dashboard__panel" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
+				<!-- wp:heading {"level":3,"fontSize":"large"} -->
+				<h3 class="wp-block-heading has-large-font-size">Shopping list</h3>
+				<!-- /wp:heading -->
+
+				<!-- wp:paragraph {"textColor":"contrast-muted","fontSize":"small"} -->
+				<p class="has-contrast-muted-color has-text-color has-small-font-size">WooCommerce-ready list or product shortcode region.</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:spacer {"height":"120px"} -->
+				<div style="height:120px" aria-hidden="true" class="wp-block-spacer"></div>
+				<!-- /wp:spacer -->
+
+				<!-- wp:buttons -->
+				<div class="wp-block-buttons">
+					<!-- wp:button {"width":100} -->
+					<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link wp-element-button" href="/shop/">Go to shop</a></div>
+					<!-- /wp:button -->
+				</div>
+				<!-- /wp:buttons -->
+			</div>
+			<!-- /wp:group -->
+		</div>
+		<!-- /wp:column -->
+	</div>
+	<!-- /wp:columns -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","area":"footer"} /-->

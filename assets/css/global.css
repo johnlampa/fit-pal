@@ -1,0 +1,118 @@
+/*
+ * Fit Pal — global layout overrides.
+ * Theme tokens and block styles are primarily driven by theme.json.
+ */
+
+/* -------------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------------- */
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video,
+svg {
+	max-width: 100%;
+	height: auto;
+}
+
+/* -------------------------------------------------------------------------
+   Layout helpers
+   ------------------------------------------------------------------------- */
+
+.fit-pal-section {
+	padding-block: var(--wp--custom--fitness--section-gap, 4.5rem);
+}
+
+.fit-pal-dashboard {
+	min-height: 60vh;
+}
+
+.fit-pal-dashboard__panel {
+	background: var(--wp--preset--color--base-alt);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 35%, transparent);
+	border-radius: 8px;
+}
+
+/* -------------------------------------------------------------------------
+   GHL lead capture region
+   ------------------------------------------------------------------------- */
+
+.fit-pal-ghl-embed {
+	min-height: 320px;
+	display: flex;
+	align-items: stretch;
+	justify-content: center;
+}
+
+.fit-pal-ghl-embed__slot {
+	width: 100%;
+	min-height: 320px;
+	border: 1px dashed color-mix(in srgb, var(--wp--preset--color--accent) 40%, transparent);
+	border-radius: 8px;
+	background: color-mix(in srgb, var(--wp--preset--color--base-alt) 80%, transparent);
+}
+
+.fit-pal-ghl-embed__slot:empty::before {
+	content: "GoHighLevel form embed";
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	min-height: 320px;
+	color: var(--wp--preset--color--contrast-muted);
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--small);
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------------------
+   WooCommerce structural compatibility
+   ------------------------------------------------------------------------- */
+
+.woocommerce .woocommerce-products-header,
+.woocommerce-page .woocommerce-products-header {
+	margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.woocommerce ul.products,
+.woocommerce-page ul.products {
+	margin-inline: 0;
+	padding-inline: 0;
+}
+
+.woocommerce div.product .summary {
+	margin-top: 0;
+}
+
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+	border-top-color: var(--wp--preset--color--accent);
+}
+
+/* -------------------------------------------------------------------------
+   Reduced motion
+   ------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

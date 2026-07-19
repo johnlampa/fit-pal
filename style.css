@@ -1,0 +1,17 @@
+/*
+Theme Name: Fit Pal
+Theme URI: https://fitpal.example
+Author: Fit Pal
+Author URI: https://fitpal.example
+Description: A modern, high-performance block theme for fitness meal planning — dark/light palette, WooCommerce-ready, and built for Full Site Editing.
+Requires at least: 6.4
+Tested up to: 6.7
+Requires PHP: 7.4
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: fit-pal
+Tags: full-site-editing, block-themes, e-commerce, food-and-drink, custom-colors, custom-logo, custom-menu, featured-images, wide-blocks, translation-ready
+*/
+
+/* Global layout overrides live in assets/css/global.css (enqueued via functions.php). */
