@@ -42,6 +42,48 @@ svg {
 }
 
 /* -------------------------------------------------------------------------
+   Front page sections
+   ------------------------------------------------------------------------- */
+
+.fit-pal-hero {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.fit-pal-hero__title {
+	max-width: 14ch;
+}
+
+.fit-pal-hero__subtitle {
+	max-width: 36rem;
+}
+
+.fit-pal-feature .wp-block-group,
+.fit-pal-recipe-card {
+	height: 100%;
+}
+
+.fit-pal-recipe-card__media {
+	min-height: 11rem;
+	background-image:
+		linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--wp--preset--color--accent) 12%, transparent),
+			transparent 55%
+		),
+		linear-gradient(
+			160deg,
+			var(--wp--preset--color--slate-700),
+			var(--wp--preset--color--base)
+		);
+}
+
+.fit-pal-macro-tag {
+	margin: 0;
+}
+
+/* -------------------------------------------------------------------------
    GHL lead capture region
    ------------------------------------------------------------------------- */
 
