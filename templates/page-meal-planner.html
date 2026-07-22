@@ -3,7 +3,6 @@
 <!-- wp:group {"tagName":"main","className":"fit-pal-dashboard fit-pal-meal-planner","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|70","left":"var:preset|spacing|50","right":"var:preset|spacing|50"},"blockGap":"var:preset|spacing|50"}},"layout":{"type":"constrained","contentSize":"960px"}} -->
 <main class="wp-block-group fit-pal-dashboard fit-pal-meal-planner" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--50)">
 
-	<!-- Intro (kept short — detail lives in each step) -->
 	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"constrained"}} -->
 	<div class="wp-block-group">
 		<!-- wp:paragraph {"style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.08em","fontWeight":"600"}},"textColor":"accent","fontSize":"small"} -->
@@ -15,53 +14,35 @@
 		<!-- /wp:heading -->
 
 		<!-- wp:paragraph {"textColor":"contrast-muted"} -->
-		<p class="has-contrast-muted-color has-text-color">Four steps: set your span, tune food macros, build the board, then cook &amp; shop.</p>
+		<p class="has-contrast-muted-color has-text-color">Build your board, shop the list, then batch-cook what’s left.</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
 
-	<!-- Wizard shell — panels are shown one at a time via JS -->
 	<!-- wp:html -->
-	<div id="fit-pal-meal-planner-app" class="fit-pal-wizard" data-fit-pal-meal-planner>
+	<div id="fit-pal-meal-planner-app" class="fit-pal-planner" data-fit-pal-meal-planner>
 
-		<nav class="fit-pal-wizard__nav" aria-label="Meal planner steps">
-			<ol class="fit-pal-wizard__steps" role="list">
-				<li>
-					<button type="button" class="fit-pal-wizard__step is-active" data-step="1" aria-current="step">
-						<span class="fit-pal-wizard__step-num">1</span>
-						<span class="fit-pal-wizard__step-label">Plan</span>
-					</button>
-				</li>
-				<li>
-					<button type="button" class="fit-pal-wizard__step" data-step="2">
-						<span class="fit-pal-wizard__step-num">2</span>
-						<span class="fit-pal-wizard__step-label">Food macros</span>
-					</button>
-				</li>
-				<li>
-					<button type="button" class="fit-pal-wizard__step" data-step="3">
-						<span class="fit-pal-wizard__step-num">3</span>
-						<span class="fit-pal-wizard__step-label">Meal board</span>
-					</button>
-				</li>
-				<li>
-					<button type="button" class="fit-pal-wizard__step" data-step="4">
-						<span class="fit-pal-wizard__step-num">4</span>
-						<span class="fit-pal-wizard__step-label">Cook &amp; shop</span>
-					</button>
-				</li>
-			</ol>
+		<nav class="fit-pal-planner__tabs" aria-label="Meal planner tabs">
+			<button type="button" class="fit-pal-planner__tab is-active" data-tab="board" aria-current="page">Meal board</button>
+			<button type="button" class="fit-pal-planner__tab" data-tab="grocery">Grocery list</button>
+			<button type="button" class="fit-pal-planner__tab" data-tab="cook">Cook</button>
 		</nav>
 
-		<!-- Step 1: Plan setup -->
-		<section class="fit-pal-wizard__panel is-active" data-panel="1" aria-labelledby="step-1-title">
-			<header class="fit-pal-wizard__panel-header">
-				<h2 id="step-1-title" class="fit-pal-wizard__panel-title">Plan setup</h2>
-				<p class="fit-pal-wizard__panel-desc">Grocery span locks meal-plan length 1:1. Batch window only affects prep, not the full shopping list.</p>
+		<!-- Tab: Meal board -->
+		<section class="fit-pal-planner__panel is-active" data-panel="board" aria-labelledby="tab-board-title">
+			<header class="fit-pal-planner__panel-header">
+				<div class="fit-pal-planner__panel-heading">
+					<h2 id="tab-board-title" class="fit-pal-planner__panel-title">Meal board</h2>
+					<p class="fit-pal-planner__panel-desc">Set grocery span, add viands per day, then save so batch cooks can pick up where you left off.</p>
+				</div>
+				<div class="fit-pal-planner__panel-actions">
+					<button type="button" class="fit-pal-planner__btn fit-pal-planner__btn--ghost" id="fit-pal-open-targets" aria-expanded="false" aria-controls="fit-pal-targets-drawer">Target macros</button>
+					<button type="button" class="fit-pal-planner__btn fit-pal-planner__btn--ghost" id="fit-pal-open-food-macros" aria-expanded="false" aria-controls="fit-pal-food-macros-drawer">Food macros</button>
+				</div>
 			</header>
 
-			<div class="fit-pal-dashboard__panel fit-pal-wizard__card">
-				<div class="fit-pal-control-bar" data-fit-pal-controls>
+			<div class="fit-pal-dashboard__panel fit-pal-planner__card">
+				<div class="fit-pal-control-bar">
 					<div class="fit-pal-control-bar__field">
 						<label class="fit-pal-control-bar__label" for="fit-pal-grocery-span">Grocery &amp; Plan Span</label>
 						<select id="fit-pal-grocery-span" class="fit-pal-control-bar__select" name="grocery_span">
@@ -71,105 +52,132 @@
 							<option value="4">4 Weeks (28 days)</option>
 						</select>
 					</div>
+				</div>
+			</div>
+
+			<div id="meal-plan-board" class="fit-pal-meal-board" data-fit-pal-meal-board>
+				<p class="fit-pal-meal-board__loading">Loading meal plan…</p>
+			</div>
+
+			<div class="fit-pal-dashboard__panel fit-pal-planner__card fit-pal-board-footer">
+				<div class="fit-pal-board-footer__save">
+					<button type="button" class="fit-pal-planner__btn fit-pal-planner__btn--primary" id="fit-pal-save-board">Save meal board</button>
+					<p class="fit-pal-save-status" id="fit-pal-save-status" aria-live="polite"></p>
+				</div>
+				<div id="fit-pal-board-history" class="fit-pal-board-history" aria-live="polite"></div>
+			</div>
+		</section>
+
+		<!-- Tab: Grocery list -->
+		<section class="fit-pal-planner__panel" data-panel="grocery" hidden aria-labelledby="tab-grocery-title">
+			<header class="fit-pal-planner__panel-header">
+				<div class="fit-pal-planner__panel-heading">
+					<h2 id="tab-grocery-title" class="fit-pal-planner__panel-title">Grocery list</h2>
+					<p class="fit-pal-planner__panel-desc">Full-plan palengke totals from your meal board.</p>
+				</div>
+			</header>
+			<div class="fit-pal-dashboard__panel fit-pal-planner__card">
+				<div id="grocery-list-container" class="fit-pal-grocery" data-fit-pal-grocery>
+					<p class="fit-pal-grocery__empty">Building shopping list…</p>
+				</div>
+				<div class="fit-pal-grocery-footer">
+					<button type="button" class="fit-pal-planner__btn fit-pal-planner__btn--primary" id="fit-pal-copy-grocery">Copy grocery list</button>
+					<p class="fit-pal-copy-status" id="fit-pal-copy-status" aria-live="polite"></p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Tab: Cook -->
+		<section class="fit-pal-planner__panel" data-panel="cook" hidden aria-labelledby="tab-cook-title">
+			<header class="fit-pal-planner__panel-header">
+				<div class="fit-pal-planner__panel-heading">
+					<h2 id="tab-cook-title" class="fit-pal-planner__panel-title">Cook</h2>
+					<p class="fit-pal-planner__panel-desc">Batch the next uncooked days from your meal board. Log done when prep is finished.</p>
+				</div>
+			</header>
+
+			<div class="fit-pal-dashboard__panel fit-pal-planner__card">
+				<div class="fit-pal-control-bar">
 					<div class="fit-pal-control-bar__field">
-						<label class="fit-pal-control-bar__label" for="fit-pal-batch-window">Batch Cooking Window</label>
+						<label class="fit-pal-control-bar__label" for="fit-pal-batch-window">Batch cooking window</label>
 						<select id="fit-pal-batch-window" class="fit-pal-control-bar__select" name="batch_window">
-							<option value="2">Next 2 Days</option>
-							<option value="3" selected>Next 3 Days</option>
-							<option value="5">Next 5 Days</option>
-							<option value="7">Next 7 Days</option>
+							<option value="2">Next 2 uncooked days</option>
+							<option value="3" selected>Next 3 uncooked days</option>
+							<option value="5">Next 5 uncooked days</option>
+							<option value="7">Next 7 uncooked days</option>
 						</select>
 					</div>
 					<div class="fit-pal-control-bar__meta" aria-live="polite">
-						<p class="fit-pal-control-bar__stat"><span class="fit-pal-control-bar__stat-label">Active plan</span> <strong id="fit-pal-plan-length">7 days</strong></p>
+						<p class="fit-pal-control-bar__stat"><span class="fit-pal-control-bar__stat-label">Next batch</span> <strong id="fit-pal-batch-range">—</strong></p>
+					</div>
+					<div class="fit-pal-control-bar__meta">
+						<button type="button" class="fit-pal-planner__btn fit-pal-planner__btn--primary" id="fit-pal-log-cooked">Log done cooking</button>
+						<button type="button" class="fit-pal-planner__btn fit-pal-planner__btn--ghost" id="fit-pal-reset-cook" hidden>Reset cooking progress</button>
+						<p class="fit-pal-cook-status" id="fit-pal-cook-status" aria-live="polite"></p>
 					</div>
 				</div>
 			</div>
 
-			<div class="fit-pal-macro-meter fit-pal-macro-meter--compact" id="fit-pal-macro-meter" aria-live="polite">
-				<div class="fit-pal-dashboard__panel fit-pal-macro-card">
-					<p class="fit-pal-macro-card__eyebrow">Calories</p>
-					<p class="fit-pal-macro-card__actual"><span id="macro-actual-calories">0</span> kcal</p>
-					<p class="fit-pal-macro-card__target">Target <span id="macro-target-calories">2200</span></p>
-					<div class="fit-pal-macro-card__bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-						<span class="fit-pal-macro-card__bar-fill" id="macro-bar-calories"></span>
-					</div>
-				</div>
-				<div class="fit-pal-dashboard__panel fit-pal-macro-card">
-					<p class="fit-pal-macro-card__eyebrow">Protein</p>
-					<p class="fit-pal-macro-card__actual"><span id="macro-actual-protein">0</span> g</p>
-					<p class="fit-pal-macro-card__target">Target <span id="macro-target-protein">180</span> g</p>
-					<div class="fit-pal-macro-card__bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-						<span class="fit-pal-macro-card__bar-fill" id="macro-bar-protein"></span>
-					</div>
-				</div>
-				<div class="fit-pal-dashboard__panel fit-pal-macro-card">
-					<p class="fit-pal-macro-card__eyebrow">Carbs</p>
-					<p class="fit-pal-macro-card__actual"><span id="macro-actual-carbs">0</span> g</p>
-					<p class="fit-pal-macro-card__target">Target <span id="macro-target-carbs">220</span> g</p>
-					<div class="fit-pal-macro-card__bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-						<span class="fit-pal-macro-card__bar-fill" id="macro-bar-carbs"></span>
-					</div>
-				</div>
-				<div class="fit-pal-dashboard__panel fit-pal-macro-card">
-					<p class="fit-pal-macro-card__eyebrow">Fats</p>
-					<p class="fit-pal-macro-card__actual"><span id="macro-actual-fats">0</span> g</p>
-					<p class="fit-pal-macro-card__target">Target <span id="macro-target-fats">65</span> g</p>
-					<div class="fit-pal-macro-card__bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-						<span class="fit-pal-macro-card__bar-fill" id="macro-bar-fats"></span>
-					</div>
+			<div class="fit-pal-dashboard__panel fit-pal-planner__card">
+				<div id="batch-cooking-output" class="fit-pal-batch-output" data-fit-pal-batch-output>
+					<p class="fit-pal-batch-output__empty">Loading prep session…</p>
 				</div>
 			</div>
 		</section>
 
-		<!-- Step 2: Editable food macros -->
-		<section class="fit-pal-wizard__panel" data-panel="2" hidden aria-labelledby="step-2-title">
-			<header class="fit-pal-wizard__panel-header">
-				<h2 id="step-2-title" class="fit-pal-wizard__panel-title">Food macros</h2>
-				<p class="fit-pal-wizard__panel-desc">Override per-100g values from your product labels. Changes recalculate the board, batch prep, and grocery macros.</p>
-			</header>
-			<div id="food-macros-editor" class="fit-pal-food-macros" data-fit-pal-food-macros></div>
-		</section>
+		<!-- Optional: Target macros drawer -->
+		<div id="fit-pal-targets-drawer" class="fit-pal-drawer" hidden>
+			<div class="fit-pal-drawer__backdrop" data-close-drawer="targets"></div>
+			<aside class="fit-pal-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="targets-drawer-title">
+				<header class="fit-pal-drawer__header">
+					<h3 id="targets-drawer-title" class="fit-pal-drawer__title">Daily target macros</h3>
+					<button type="button" class="fit-pal-drawer__close" data-close-drawer="targets" aria-label="Close">×</button>
+				</header>
+				<div id="targets-editor" class="fit-pal-targets-editor"></div>
+			</aside>
+		</div>
 
-		<!-- Step 3: Meal board -->
-		<section class="fit-pal-wizard__panel" data-panel="3" hidden aria-labelledby="step-3-title">
-			<header class="fit-pal-wizard__panel-header">
-				<h2 id="step-3-title" class="fit-pal-wizard__panel-title">Meal board</h2>
-				<p class="fit-pal-wizard__panel-desc">Swap proteins per meal. Macros stay matched by scaling raw weight.</p>
-			</header>
-			<div id="meal-plan-board" class="fit-pal-meal-board" data-fit-pal-meal-board aria-live="polite">
-				<p class="fit-pal-meal-board__loading">Loading meal plan…</p>
+		<!-- Optional: Food macros drawer -->
+		<div id="fit-pal-food-macros-drawer" class="fit-pal-drawer" hidden>
+			<div class="fit-pal-drawer__backdrop" data-close-drawer="food-macros"></div>
+			<aside class="fit-pal-drawer__panel fit-pal-drawer__panel--wide" role="dialog" aria-modal="true" aria-labelledby="food-macros-drawer-title">
+				<header class="fit-pal-drawer__header">
+					<h3 id="food-macros-drawer-title" class="fit-pal-drawer__title">Food macros</h3>
+					<button type="button" class="fit-pal-drawer__close" data-close-drawer="food-macros" aria-label="Close">×</button>
+				</header>
+				<div id="food-macros-editor" class="fit-pal-food-macros" data-fit-pal-food-macros></div>
+			</aside>
+		</div>
+
+		<!-- Add meal modal -->
+		<div id="fit-pal-meal-modal" class="fit-pal-modal" hidden>
+			<div class="fit-pal-modal__backdrop" data-close-modal="meal"></div>
+			<div class="fit-pal-modal__panel" role="dialog" aria-modal="true" aria-labelledby="meal-modal-title">
+				<header class="fit-pal-modal__header">
+					<h3 id="meal-modal-title" class="fit-pal-modal__title">Add a meal</h3>
+					<button type="button" class="fit-pal-modal__close" data-close-modal="meal" aria-label="Close">×</button>
+				</header>
+				<p class="fit-pal-modal__hint" id="meal-modal-hint">Pick a viand for this day.</p>
+				<div id="meal-modal-list" class="fit-pal-modal__list"></div>
 			</div>
-		</section>
+		</div>
 
-		<!-- Step 4: Cook & shop -->
-		<section class="fit-pal-wizard__panel" data-panel="4" hidden aria-labelledby="step-4-title">
-			<header class="fit-pal-wizard__panel-header">
-				<h2 id="step-4-title" class="fit-pal-wizard__panel-title">Cook &amp; shop</h2>
-				<p class="fit-pal-wizard__panel-desc">Batch recipes + raw weights for your cooking window, then the full-plan palengke list.</p>
-			</header>
-
-			<div class="fit-pal-cook-shop">
-				<div class="fit-pal-dashboard__panel fit-pal-wizard__card">
-					<h3 class="fit-pal-wizard__card-title">Batch cooking</h3>
-					<div id="batch-cooking-output" class="fit-pal-batch-output" data-fit-pal-batch-output aria-live="polite">
-						<p class="fit-pal-batch-output__empty">Loading prep session…</p>
-					</div>
-				</div>
-				<div class="fit-pal-dashboard__panel fit-pal-wizard__card">
-					<h3 class="fit-pal-wizard__card-title">Palengke grocery list</h3>
-					<div id="grocery-list-container" class="fit-pal-grocery" data-fit-pal-grocery aria-live="polite">
-						<p class="fit-pal-grocery__empty">Building shopping list…</p>
-					</div>
-					<p class="fit-pal-wizard__shop-link"><a href="/shop/">Shop Fit Pal staples →</a></p>
+		<!-- Confirm modal -->
+		<div id="fit-pal-confirm-modal" class="fit-pal-modal" hidden>
+			<div class="fit-pal-modal__backdrop" data-close-modal="confirm"></div>
+			<div class="fit-pal-modal__panel fit-pal-modal__panel--confirm" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title">
+				<header class="fit-pal-modal__header">
+					<h3 id="confirm-modal-title" class="fit-pal-modal__title">Are you sure?</h3>
+					<button type="button" class="fit-pal-modal__close" data-close-modal="confirm" aria-label="Close">×</button>
+				</header>
+				<p class="fit-pal-modal__hint" id="confirm-modal-message">This action cannot be undone.</p>
+				<div class="fit-pal-modal__actions">
+					<button type="button" class="fit-pal-planner__btn fit-pal-planner__btn--ghost" id="fit-pal-confirm-cancel" data-close-modal="confirm">Cancel</button>
+					<button type="button" class="fit-pal-planner__btn fit-pal-planner__btn--danger" id="fit-pal-confirm-ok">Confirm</button>
 				</div>
 			</div>
-		</section>
+		</div>
 
-		<footer class="fit-pal-wizard__footer">
-			<button type="button" class="fit-pal-wizard__btn fit-pal-wizard__btn--ghost" id="fit-pal-step-prev" disabled>Back</button>
-			<button type="button" class="fit-pal-wizard__btn fit-pal-wizard__btn--primary" id="fit-pal-step-next">Continue</button>
-		</footer>
 	</div>
 	<!-- /wp:html -->
 

@@ -5,11 +5,27 @@
 		<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
 		<div class="wp-block-group">
 			<!-- wp:site-logo {"width":48,"shouldSyncIcon":true} /-->
-			<!-- wp:site-title {"level":0} /-->
+			<!-- wp:paragraph {"className":"fit-pal-brand","style":{"typography":{"fontWeight":"700","letterSpacing":"-0.02em"}},"fontSize":"large"} -->
+			<p class="fit-pal-brand has-large-font-size" style="font-weight:700;letter-spacing:-0.02em"><a href="/">Fit Pal</a></p>
+			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:navigation {"overlayBackgroundColor":"base","overlayTextColor":"contrast","layout":{"type":"flex","justifyContent":"right","flexWrap":"wrap"},"style":{"spacing":{"blockGap":"var:preset|spacing|50"}}} /-->
+		<!-- wp:group {"className":"fit-pal-nav","style":{"spacing":{"blockGap":"var:preset|spacing|50"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"right","verticalAlignment":"center"}} -->
+		<div class="wp-block-group fit-pal-nav">
+			<!-- wp:paragraph {"fontSize":"small"} -->
+			<p class="has-small-font-size"><a href="/">Home</a></p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:paragraph {"fontSize":"small"} -->
+			<p class="has-small-font-size"><a href="/meal-planner/">Meal Planner</a></p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:paragraph {"fontSize":"small"} -->
+			<p class="has-small-font-size"><a href="/shop/">Shop</a></p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
 
 		<!-- wp:buttons {"layout":{"type":"flex"}} -->
 		<div class="wp-block-buttons">

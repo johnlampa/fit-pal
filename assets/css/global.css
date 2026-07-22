@@ -142,7 +142,37 @@ svg {
 }
 
 /* -------------------------------------------------------------------------
-   Meal Planner wizard
+   Header / footer brand nav
+   ------------------------------------------------------------------------- */
+
+.fit-pal-brand,
+.fit-pal-brand a {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--outfit);
+	color: var(--wp--preset--color--contrast);
+	text-decoration: none;
+}
+
+.fit-pal-brand a:hover {
+	color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-nav p {
+	margin: 0;
+}
+
+.fit-pal-nav a {
+	color: var(--wp--preset--color--contrast-muted);
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.fit-pal-nav a:hover {
+	color: var(--wp--preset--color--accent);
+}
+
+/* -------------------------------------------------------------------------
+   Meal Planner
    ------------------------------------------------------------------------- */
 
 .fit-pal-meal-planner .screen-reader-text {
@@ -158,72 +188,61 @@ svg {
 	word-wrap: normal !important;
 }
 
-.fit-pal-wizard {
+.fit-pal-planner {
 	display: flex;
 	flex-direction: column;
 	gap: var(--wp--preset--spacing--50);
 }
 
-.fit-pal-wizard__steps {
+.fit-pal-planner__tabs {
 	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 0.5rem;
-	margin: 0;
-	padding: 0;
-	list-style: none;
 }
 
-.fit-pal-wizard__step {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 0.35rem;
-	width: 100%;
-	padding: 0.75rem 0.85rem;
+.fit-pal-planner__tab {
+	appearance: none;
 	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 35%, transparent);
 	border-radius: 8px;
 	background: var(--wp--preset--color--base-alt);
 	color: var(--wp--preset--color--contrast-muted);
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	padding: 0.85rem 1rem;
 	cursor: pointer;
-	text-align: left;
 	transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
 
-.fit-pal-wizard__step:hover {
+.fit-pal-planner__tab:hover {
 	border-color: color-mix(in srgb, var(--wp--preset--color--accent) 45%, transparent);
 	color: var(--wp--preset--color--contrast);
 }
 
-.fit-pal-wizard__step.is-active {
+.fit-pal-planner__tab.is-active {
 	border-color: var(--wp--preset--color--accent);
 	background: color-mix(in srgb, var(--wp--preset--color--accent) 10%, var(--wp--preset--color--base));
 	color: var(--wp--preset--color--contrast);
 }
 
-.fit-pal-wizard__step-num {
-	font-family: var(--wp--preset--font-family--outfit);
-	font-size: var(--wp--preset--font-size--small);
-	font-weight: 700;
-	letter-spacing: 0.06em;
-	color: var(--wp--preset--color--accent);
-}
-
-.fit-pal-wizard__step-label {
-	font-family: var(--wp--preset--font-family--outfit);
-	font-size: var(--wp--preset--font-size--small);
-	font-weight: 600;
-	line-height: 1.25;
-}
-
-.fit-pal-wizard__panel[hidden] {
+.fit-pal-planner__panel[hidden] {
 	display: none !important;
 }
 
-.fit-pal-wizard__panel-header {
+.fit-pal-planner__panel-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1rem;
 	margin-bottom: var(--wp--preset--spacing--40);
 }
 
-.fit-pal-wizard__panel-title {
+.fit-pal-planner__panel-heading {
+	flex: 1 1 16rem;
+}
+
+.fit-pal-planner__panel-title {
 	margin: 0 0 0.4rem;
 	font-family: var(--wp--preset--font-family--outfit);
 	font-size: var(--wp--preset--font-size--x-large);
@@ -231,82 +250,70 @@ svg {
 	color: var(--wp--preset--color--contrast);
 }
 
-.fit-pal-wizard__panel-desc {
+.fit-pal-planner__panel-desc {
 	margin: 0;
 	max-width: 40rem;
 	color: var(--wp--preset--color--contrast-muted);
 }
 
-.fit-pal-wizard__card {
+.fit-pal-planner__panel-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	justify-content: flex-end;
+}
+
+.fit-pal-planner__card {
 	padding: var(--wp--preset--spacing--50);
 }
 
-.fit-pal-wizard__card-title {
-	margin: 0 0 var(--wp--preset--spacing--30);
-	font-family: var(--wp--preset--font-family--outfit);
-	font-size: var(--wp--preset--font-size--large);
-	font-weight: 700;
-	color: var(--wp--preset--color--contrast);
-}
-
-.fit-pal-wizard__footer {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	gap: 0.75rem;
-	padding-top: var(--wp--preset--spacing--30);
-	border-top: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 30%, transparent);
-}
-
-.fit-pal-wizard__btn {
+.fit-pal-planner__btn {
 	appearance: none;
 	border-radius: 6px;
 	border: 1px solid transparent;
 	font-family: var(--wp--preset--font-family--outfit);
-	font-size: var(--wp--preset--font-size--medium);
+	font-size: var(--wp--preset--font-size--small);
 	font-weight: 600;
-	padding: 0.7rem 1.25rem;
+	padding: 0.65rem 1rem;
 	cursor: pointer;
 	transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
 
-.fit-pal-wizard__btn:disabled {
-	opacity: 0.4;
-	cursor: not-allowed;
-}
-
-.fit-pal-wizard__btn--primary {
+.fit-pal-planner__btn--primary {
 	background: var(--wp--preset--color--accent);
 	color: var(--wp--preset--color--base);
 }
 
-.fit-pal-wizard__btn--primary:hover:not(:disabled) {
+.fit-pal-planner__btn--primary:hover {
 	background: var(--wp--preset--color--accent-strong);
 }
 
-.fit-pal-wizard__btn--ghost {
+.fit-pal-planner__btn--ghost {
 	background: transparent;
 	border-color: color-mix(in srgb, var(--wp--preset--color--slate-500) 50%, transparent);
 	color: var(--wp--preset--color--contrast);
 }
 
-.fit-pal-wizard__btn--ghost:hover:not(:disabled) {
+.fit-pal-planner__btn--ghost:hover {
 	border-color: var(--wp--preset--color--accent);
 	color: var(--wp--preset--color--accent);
 }
 
-.fit-pal-wizard__shop-link {
-	margin: var(--wp--preset--spacing--40) 0 0;
+.fit-pal-planner__btn--danger {
+	background: #ef4444;
+	color: #fff;
 }
 
-.fit-pal-wizard__shop-link a {
+.fit-pal-planner__btn--danger:hover {
+	background: #dc2626;
+}
+
+.fit-pal-save-status,
+.fit-pal-copy-status,
+.fit-pal-cook-status {
+	margin: 0.5rem 0 0;
+	font-size: var(--wp--preset--font-size--small);
 	color: var(--wp--preset--color--accent);
-	font-weight: 600;
-	text-decoration: none;
-}
-
-.fit-pal-wizard__shop-link a:hover {
-	text-decoration: underline;
 }
 
 .fit-pal-control-bar {
@@ -327,8 +334,7 @@ svg {
 	color: var(--wp--preset--color--contrast);
 }
 
-.fit-pal-control-bar__select,
-.fit-pal-meal-card__protein-select {
+.fit-pal-control-bar__select {
 	width: 100%;
 	appearance: none;
 	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 45%, transparent);
@@ -347,11 +353,15 @@ svg {
 }
 
 .fit-pal-control-bar__select:focus,
-.fit-pal-meal-card__protein-select:focus,
 .fit-pal-food-macros__input:focus,
 .fit-pal-grocery__checkbox:focus,
-.fit-pal-wizard__step:focus-visible,
-.fit-pal-wizard__btn:focus-visible {
+.fit-pal-planner__tab:focus-visible,
+.fit-pal-planner__btn:focus-visible,
+.fit-pal-meal-card__remove:focus-visible,
+.fit-pal-day-card__add:focus-visible,
+.fit-pal-modal__viand:focus-visible,
+.fit-pal-drawer__close:focus-visible,
+.fit-pal-modal__close:focus-visible {
 	outline: 2px solid var(--wp--preset--color--accent);
 	outline-offset: 2px;
 }
@@ -429,6 +439,166 @@ svg {
 	transition: width 0.35s ease;
 }
 
+/* Drawers & modal */
+
+.fit-pal-drawer[hidden],
+.fit-pal-modal[hidden] {
+	display: none !important;
+}
+
+.fit-pal-drawer,
+.fit-pal-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+}
+
+.fit-pal-drawer__backdrop,
+.fit-pal-modal__backdrop {
+	position: absolute;
+	inset: 0;
+	background: color-mix(in srgb, var(--wp--preset--color--base) 70%, transparent);
+}
+
+.fit-pal-drawer__panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: min(28rem, 100%);
+	overflow: auto;
+	background: var(--wp--preset--color--base-alt);
+	border-left: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 35%, transparent);
+	padding: var(--wp--preset--spacing--50);
+	box-shadow: -12px 0 40px color-mix(in srgb, #000 35%, transparent);
+}
+
+.fit-pal-drawer__panel--wide {
+	width: min(40rem, 100%);
+}
+
+.fit-pal-modal__panel {
+	position: relative;
+	z-index: 1;
+	width: min(40rem, calc(100% - 2rem));
+	max-height: min(85vh, 44rem);
+	overflow: auto;
+	margin: 5vh auto;
+	background: var(--wp--preset--color--base-alt);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 35%, transparent);
+	border-radius: 10px;
+	padding: var(--wp--preset--spacing--50);
+	box-shadow: 0 20px 60px color-mix(in srgb, #000 45%, transparent);
+}
+
+.fit-pal-modal__panel--confirm {
+	width: min(28rem, calc(100% - 2rem));
+	max-height: none;
+}
+
+.fit-pal-modal__actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 0.65rem;
+	margin-top: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-drawer__header,
+.fit-pal-modal__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-drawer__title,
+.fit-pal-modal__title {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--large);
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-drawer__close,
+.fit-pal-modal__close {
+	appearance: none;
+	border: 0;
+	background: transparent;
+	color: var(--wp--preset--color--contrast-muted);
+	font-size: 1.75rem;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0.15rem 0.4rem;
+}
+
+.fit-pal-drawer__close:hover,
+.fit-pal-modal__close:hover {
+	color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-modal__hint {
+	margin: 0 0 var(--wp--preset--spacing--40);
+	color: var(--wp--preset--color--contrast-muted);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.fit-pal-modal__group {
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-modal__group-title {
+	margin: 0 0 0.65rem;
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-modal__grid {
+	display: grid;
+	gap: 0.65rem;
+}
+
+.fit-pal-modal__viand {
+	appearance: none;
+	width: 100%;
+	text-align: left;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 40%, transparent);
+	border-radius: 8px;
+	background: var(--wp--preset--color--base);
+	color: var(--wp--preset--color--contrast);
+	padding: 0.85rem 1rem;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.fit-pal-modal__viand:hover {
+	border-color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-modal__viand-name {
+	font-family: var(--wp--preset--font-family--outfit);
+	font-weight: 600;
+}
+
+.fit-pal-modal__viand-meta {
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-targets-editor__grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.85rem;
+	width: 100%;
+}
+
 /* Food macros editor */
 
 .fit-pal-food-macros {
@@ -469,7 +639,7 @@ svg {
 	padding: var(--wp--preset--spacing--40);
 	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 35%, transparent);
 	border-radius: 8px;
-	background: var(--wp--preset--color--base-alt);
+	background: var(--wp--preset--color--base);
 }
 
 .fit-pal-food-macros__card:last-child {
@@ -515,10 +685,15 @@ svg {
 	padding: 0;
 }
 
+.fit-pal-food-macros__field {
+	min-width: 0;
+}
+
 .fit-pal-food-macros__grid {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 0.65rem;
+	gap: 0.75rem;
+	width: 100%;
 }
 
 .fit-pal-food-macros__label {
@@ -532,9 +707,11 @@ svg {
 
 .fit-pal-food-macros__input {
 	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 45%, transparent);
 	border-radius: 6px;
-	background: var(--wp--preset--color--base);
+	background: var(--wp--preset--color--base-alt);
 	color: var(--wp--preset--color--contrast);
 	font-family: var(--wp--preset--font-family--dm-sans);
 	font-size: var(--wp--preset--font-size--small);
@@ -546,6 +723,7 @@ svg {
 .fit-pal-meal-board {
 	display: grid;
 	gap: var(--wp--preset--spacing--40);
+	margin-top: var(--wp--preset--spacing--40);
 }
 
 .fit-pal-board-week {
@@ -559,15 +737,24 @@ svg {
 	padding: var(--wp--preset--spacing--40);
 }
 
+.fit-pal-day-card.is-cooked {
+	opacity: 0.72;
+	border-color: color-mix(in srgb, var(--wp--preset--color--success) 45%, transparent);
+}
+
 .fit-pal-day-card__header {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: baseline;
+	align-items: center;
 	justify-content: space-between;
 	gap: 0.5rem 1rem;
-	margin-bottom: var(--wp--preset--spacing--40);
-	padding-bottom: var(--wp--preset--spacing--30);
-	border-bottom: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 30%, transparent);
+	margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.fit-pal-day-card__title-wrap {
+	display: flex;
+	align-items: center;
+	gap: 0.65rem;
 }
 
 .fit-pal-day-card__title {
@@ -578,12 +765,144 @@ svg {
 	color: var(--wp--preset--color--contrast);
 }
 
+.fit-pal-day-card__badge {
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--base);
+	background: var(--wp--preset--color--success);
+	border-radius: 4px;
+	padding: 0.2rem 0.45rem;
+}
+
+.fit-pal-day-card__add {
+	appearance: none;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--accent) 50%, transparent);
+	border-radius: 6px;
+	background: transparent;
+	color: var(--wp--preset--color--accent);
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	padding: 0.4rem 0.75rem;
+	cursor: pointer;
+}
+
+.fit-pal-day-card__add:hover {
+	background: color-mix(in srgb, var(--wp--preset--color--accent) 12%, transparent);
+}
+
 .fit-pal-day-card__macros,
 .fit-pal-meal-card__macros,
-.fit-pal-meal-card__weight {
+.fit-pal-meal-card__protein,
+.fit-pal-day-card__empty {
+	margin: 0 0 var(--wp--preset--spacing--30);
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-day-macros {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.5rem;
+	margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.fit-pal-day-macros__label {
+	margin: 0 0 0.25rem;
+	font-size: 0.68rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: var(--wp--preset--color--contrast-muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.fit-pal-day-macros__bar {
+	height: 0.28rem;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--wp--preset--color--slate-700) 80%, transparent);
+	overflow: hidden;
+}
+
+.fit-pal-day-macros__fill {
+	display: block;
+	height: 100%;
+	width: 0;
+	border-radius: inherit;
+	background: var(--wp--preset--color--accent);
+}
+
+.fit-pal-board-footer {
+	margin-top: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-board-footer__save {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.75rem 1rem;
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-board-history__title {
+	margin: 0 0 0.75rem;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--medium);
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-board-history__empty {
 	margin: 0;
 	font-size: var(--wp--preset--font-size--small);
 	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-board-history__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.fit-pal-board-history__item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	padding: 0.75rem 0;
+	border-top: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-700) 70%, transparent);
+}
+
+.fit-pal-board-history__label {
+	margin: 0;
+	font-weight: 600;
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-board-history__date {
+	margin: 0.2rem 0 0;
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-board-history__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.fit-pal-grocery-footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.75rem 1rem;
+	margin-top: var(--wp--preset--spacing--40);
+	padding-top: var(--wp--preset--spacing--40);
+	border-top: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-700) 70%, transparent);
 }
 
 .fit-pal-day-card__meals {
@@ -595,20 +914,18 @@ svg {
 .fit-pal-meal-card {
 	display: flex;
 	flex-direction: column;
-	gap: 0.4rem;
+	gap: 0.35rem;
 	padding: var(--wp--preset--spacing--30);
 	border-radius: 6px;
 	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-700) 80%, transparent);
 	background: color-mix(in srgb, var(--wp--preset--color--base-alt) 70%, var(--wp--preset--color--base));
 }
 
-.fit-pal-meal-card__slot {
-	margin: 0;
-	font-size: 0.7rem;
-	font-weight: 600;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-	color: var(--wp--preset--color--accent);
+.fit-pal-meal-card__top {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 0.5rem;
 }
 
 .fit-pal-meal-card__title {
@@ -620,24 +937,37 @@ svg {
 	line-height: 1.3;
 }
 
-.fit-pal-meal-card__label {
-	margin-top: 0.5rem;
-	font-size: var(--wp--preset--font-size--small);
+.fit-pal-meal-card__remove {
+	appearance: none;
+	flex-shrink: 0;
+	width: 1.75rem;
+	height: 1.75rem;
+	border-radius: 4px;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 50%, transparent);
+	background: transparent;
 	color: var(--wp--preset--color--contrast-muted);
+	font-size: 1.15rem;
+	line-height: 1;
+	cursor: pointer;
 }
 
-/* Cook & shop */
-
-.fit-pal-cook-shop {
-	display: grid;
-	gap: var(--wp--preset--spacing--50);
+.fit-pal-meal-card__remove:hover {
+	border-color: #f87171;
+	color: #f87171;
 }
+
+.fit-pal-meal-card__macros {
+	margin: 0;
+}
+
+/* Cook & grocery */
 
 .fit-pal-batch-output__intro,
 .fit-pal-grocery__intro,
 .fit-pal-meal-board__loading,
 .fit-pal-batch-output__empty,
-.fit-pal-grocery__empty {
+.fit-pal-grocery__empty,
+.fit-pal-batch-output__days {
 	margin: 0 0 var(--wp--preset--spacing--30);
 	font-size: var(--wp--preset--font-size--small);
 	color: var(--wp--preset--color--contrast-muted);
@@ -756,12 +1086,22 @@ svg {
 }
 
 @media (max-width: 640px) {
-	.fit-pal-wizard__steps {
+	.fit-pal-planner__tabs {
+		grid-template-columns: 1fr;
+	}
+
+	.fit-pal-food-macros__grid,
+	.fit-pal-targets-editor__grid,
+	.fit-pal-day-macros {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
-	.fit-pal-food-macros__grid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+	.fit-pal-planner__panel-actions {
+		width: 100%;
+	}
+
+	.fit-pal-planner__panel-actions .fit-pal-planner__btn {
+		flex: 1 1 auto;
 	}
 }
 
