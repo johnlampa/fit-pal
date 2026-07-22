@@ -142,6 +142,630 @@ svg {
 }
 
 /* -------------------------------------------------------------------------
+   Meal Planner wizard
+   ------------------------------------------------------------------------- */
+
+.fit-pal-meal-planner .screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+.fit-pal-wizard {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--50);
+}
+
+.fit-pal-wizard__steps {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.fit-pal-wizard__step {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.35rem;
+	width: 100%;
+	padding: 0.75rem 0.85rem;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 35%, transparent);
+	border-radius: 8px;
+	background: var(--wp--preset--color--base-alt);
+	color: var(--wp--preset--color--contrast-muted);
+	cursor: pointer;
+	text-align: left;
+	transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.fit-pal-wizard__step:hover {
+	border-color: color-mix(in srgb, var(--wp--preset--color--accent) 45%, transparent);
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-wizard__step.is-active {
+	border-color: var(--wp--preset--color--accent);
+	background: color-mix(in srgb, var(--wp--preset--color--accent) 10%, var(--wp--preset--color--base));
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-wizard__step-num {
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-wizard__step-label {
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+.fit-pal-wizard__panel[hidden] {
+	display: none !important;
+}
+
+.fit-pal-wizard__panel-header {
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-wizard__panel-title {
+	margin: 0 0 0.4rem;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--x-large);
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-wizard__panel-desc {
+	margin: 0;
+	max-width: 40rem;
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-wizard__card {
+	padding: var(--wp--preset--spacing--50);
+}
+
+.fit-pal-wizard__card-title {
+	margin: 0 0 var(--wp--preset--spacing--30);
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--large);
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-wizard__footer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 0.75rem;
+	padding-top: var(--wp--preset--spacing--30);
+	border-top: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 30%, transparent);
+}
+
+.fit-pal-wizard__btn {
+	appearance: none;
+	border-radius: 6px;
+	border: 1px solid transparent;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--medium);
+	font-weight: 600;
+	padding: 0.7rem 1.25rem;
+	cursor: pointer;
+	transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.fit-pal-wizard__btn:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+.fit-pal-wizard__btn--primary {
+	background: var(--wp--preset--color--accent);
+	color: var(--wp--preset--color--base);
+}
+
+.fit-pal-wizard__btn--primary:hover:not(:disabled) {
+	background: var(--wp--preset--color--accent-strong);
+}
+
+.fit-pal-wizard__btn--ghost {
+	background: transparent;
+	border-color: color-mix(in srgb, var(--wp--preset--color--slate-500) 50%, transparent);
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-wizard__btn--ghost:hover:not(:disabled) {
+	border-color: var(--wp--preset--color--accent);
+	color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-wizard__shop-link {
+	margin: var(--wp--preset--spacing--40) 0 0;
+}
+
+.fit-pal-wizard__shop-link a {
+	color: var(--wp--preset--color--accent);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.fit-pal-wizard__shop-link a:hover {
+	text-decoration: underline;
+}
+
+.fit-pal-control-bar {
+	display: grid;
+	gap: var(--wp--preset--spacing--40);
+	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+	align-items: end;
+}
+
+.fit-pal-control-bar__label {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-control-bar__select,
+.fit-pal-meal-card__protein-select {
+	width: 100%;
+	appearance: none;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 45%, transparent);
+	border-radius: 6px;
+	background-color: var(--wp--preset--color--base);
+	background-image: linear-gradient(45deg, transparent 50%, var(--wp--preset--color--accent) 50%),
+		linear-gradient(135deg, var(--wp--preset--color--accent) 50%, transparent 50%);
+	background-position: calc(100% - 16px) calc(50% - 2px), calc(100% - 11px) calc(50% - 2px);
+	background-size: 5px 5px, 5px 5px;
+	background-repeat: no-repeat;
+	color: var(--wp--preset--color--contrast);
+	font-family: var(--wp--preset--font-family--dm-sans);
+	font-size: var(--wp--preset--font-size--medium);
+	line-height: 1.4;
+	padding: 0.65rem 2.25rem 0.65rem 0.85rem;
+}
+
+.fit-pal-control-bar__select:focus,
+.fit-pal-meal-card__protein-select:focus,
+.fit-pal-food-macros__input:focus,
+.fit-pal-grocery__checkbox:focus,
+.fit-pal-wizard__step:focus-visible,
+.fit-pal-wizard__btn:focus-visible {
+	outline: 2px solid var(--wp--preset--color--accent);
+	outline-offset: 2px;
+}
+
+.fit-pal-control-bar__stat {
+	margin: 0;
+	padding: 0.75rem 1rem;
+	border-radius: 6px;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--accent) 35%, transparent);
+	background: color-mix(in srgb, var(--wp--preset--color--accent) 8%, var(--wp--preset--color--base));
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-control-bar__stat-label {
+	display: block;
+	margin-bottom: 0.25rem;
+	font-size: var(--wp--preset--font-size--small);
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-macro-meter--compact {
+	display: grid;
+	gap: var(--wp--preset--spacing--30);
+	grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+	margin-top: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-macro-card {
+	padding: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-macro-card__eyebrow {
+	margin: 0 0 0.35rem;
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-macro-card__actual {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--x-large);
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast);
+	line-height: 1.15;
+}
+
+.fit-pal-macro-card__target {
+	margin: 0.35rem 0 0.75rem;
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-macro-card__bar {
+	height: 0.4rem;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--wp--preset--color--slate-700) 80%, transparent);
+	overflow: hidden;
+}
+
+.fit-pal-macro-card__bar-fill {
+	display: block;
+	height: 100%;
+	width: 0;
+	border-radius: inherit;
+	background: linear-gradient(
+		90deg,
+		var(--wp--preset--color--accent-strong),
+		var(--wp--preset--color--accent)
+	);
+	transition: width 0.35s ease;
+}
+
+/* Food macros editor */
+
+.fit-pal-food-macros {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--50);
+}
+
+.fit-pal-food-macros__toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem 1rem;
+}
+
+.fit-pal-food-macros__hint {
+	margin: 0;
+	flex: 1 1 16rem;
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-food-macros__group-title,
+.fit-pal-batch-output__group-title,
+.fit-pal-grocery__group-title {
+	margin: 0 0 0.75rem;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-food-macros__card {
+	margin-bottom: var(--wp--preset--spacing--30);
+	padding: var(--wp--preset--spacing--40);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 35%, transparent);
+	border-radius: 8px;
+	background: var(--wp--preset--color--base-alt);
+}
+
+.fit-pal-food-macros__card:last-child {
+	margin-bottom: 0;
+}
+
+.fit-pal-food-macros__card-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem 0.75rem;
+	margin-bottom: 0.85rem;
+}
+
+.fit-pal-food-macros__name {
+	margin: 0;
+	flex: 1 1 auto;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--medium);
+	font-weight: 600;
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-food-macros__badge {
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--base);
+	background: var(--wp--preset--color--accent);
+	border-radius: 4px;
+	padding: 0.2rem 0.45rem;
+}
+
+.fit-pal-food-macros__reset {
+	appearance: none;
+	border: 0;
+	background: transparent;
+	color: var(--wp--preset--color--accent);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	cursor: pointer;
+	padding: 0;
+}
+
+.fit-pal-food-macros__grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.65rem;
+}
+
+.fit-pal-food-macros__label {
+	display: block;
+	margin-bottom: 0.3rem;
+	font-size: 0.7rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-food-macros__input {
+	width: 100%;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 45%, transparent);
+	border-radius: 6px;
+	background: var(--wp--preset--color--base);
+	color: var(--wp--preset--color--contrast);
+	font-family: var(--wp--preset--font-family--dm-sans);
+	font-size: var(--wp--preset--font-size--small);
+	padding: 0.5rem 0.6rem;
+}
+
+/* Meal board */
+
+.fit-pal-meal-board {
+	display: grid;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-board-week {
+	max-width: 18rem;
+}
+
+.fit-pal-day-card {
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 35%, transparent);
+	border-radius: 8px;
+	background: var(--wp--preset--color--base);
+	padding: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-day-card__header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.5rem 1rem;
+	margin-bottom: var(--wp--preset--spacing--40);
+	padding-bottom: var(--wp--preset--spacing--30);
+	border-bottom: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-500) 30%, transparent);
+}
+
+.fit-pal-day-card__title {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--large);
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-day-card__macros,
+.fit-pal-meal-card__macros,
+.fit-pal-meal-card__weight {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-day-card__meals {
+	display: grid;
+	gap: var(--wp--preset--spacing--30);
+	grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+}
+
+.fit-pal-meal-card {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+	padding: var(--wp--preset--spacing--30);
+	border-radius: 6px;
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-700) 80%, transparent);
+	background: color-mix(in srgb, var(--wp--preset--color--base-alt) 70%, var(--wp--preset--color--base));
+}
+
+.fit-pal-meal-card__slot {
+	margin: 0;
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-meal-card__title {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--medium);
+	font-weight: 600;
+	color: var(--wp--preset--color--contrast);
+	line-height: 1.3;
+}
+
+.fit-pal-meal-card__label {
+	margin-top: 0.5rem;
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+/* Cook & shop */
+
+.fit-pal-cook-shop {
+	display: grid;
+	gap: var(--wp--preset--spacing--50);
+}
+
+.fit-pal-batch-output__intro,
+.fit-pal-grocery__intro,
+.fit-pal-meal-board__loading,
+.fit-pal-batch-output__empty,
+.fit-pal-grocery__empty {
+	margin: 0 0 var(--wp--preset--spacing--30);
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-batch-recipes {
+	margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.fit-pal-recipe-card-batch {
+	margin-bottom: var(--wp--preset--spacing--40);
+	padding: var(--wp--preset--spacing--40);
+	border: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-700) 80%, transparent);
+	border-radius: 8px;
+	background: var(--wp--preset--color--base);
+}
+
+.fit-pal-recipe-card-batch:last-child {
+	margin-bottom: 0;
+}
+
+.fit-pal-recipe-card-batch__title {
+	margin: 0 0 0.35rem;
+	font-family: var(--wp--preset--font-family--outfit);
+	font-size: var(--wp--preset--font-size--medium);
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-recipe-card-batch__meta,
+.fit-pal-recipe-card-batch__tip {
+	margin: 0 0 var(--wp--preset--spacing--30);
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+.fit-pal-recipe-card-batch__label {
+	margin: 0 0 0.4rem;
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--accent);
+}
+
+.fit-pal-recipe-card-batch__steps {
+	margin: 0 0 var(--wp--preset--spacing--30);
+	padding-left: 1.2rem;
+	color: var(--wp--preset--color--contrast);
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.55;
+}
+
+.fit-pal-recipe-card-batch__steps li {
+	margin-bottom: 0.35rem;
+}
+
+.fit-pal-batch-output__group,
+.fit-pal-grocery__group {
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.fit-pal-batch-output__group:last-child,
+.fit-pal-grocery__group:last-child {
+	margin-bottom: 0;
+}
+
+.fit-pal-batch-output__subgroup {
+	margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.fit-pal-batch-output__subgroup-title {
+	margin: 0 0 0.4rem;
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-batch-output__list,
+.fit-pal-grocery__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.fit-pal-batch-output__item,
+.fit-pal-grocery__item {
+	margin: 0;
+	padding: 0.4rem 0;
+	border-bottom: 1px solid color-mix(in srgb, var(--wp--preset--color--slate-700) 70%, transparent);
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--contrast);
+}
+
+.fit-pal-batch-output__item:last-child,
+.fit-pal-grocery__item:last-child {
+	border-bottom: 0;
+}
+
+.fit-pal-grocery__label {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.65rem;
+	cursor: pointer;
+}
+
+.fit-pal-grocery__checkbox {
+	margin-top: 0.2rem;
+	accent-color: var(--wp--preset--color--accent);
+	flex-shrink: 0;
+}
+
+.fit-pal-grocery__checkbox:checked + .fit-pal-grocery__text {
+	text-decoration: line-through;
+	color: var(--wp--preset--color--contrast-muted);
+}
+
+@media (max-width: 640px) {
+	.fit-pal-wizard__steps {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.fit-pal-food-macros__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+/* -------------------------------------------------------------------------
    Reduced motion
    ------------------------------------------------------------------------- */
 

@@ -1,91 +1,179 @@
 <!-- wp:template-part {"slug":"header","tagName":"header","area":"header"} /-->
 
-<!-- wp:group {"tagName":"main","className":"fit-pal-dashboard","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
-<main class="wp-block-group fit-pal-dashboard" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--70)">
+<!-- wp:group {"tagName":"main","className":"fit-pal-dashboard fit-pal-meal-planner","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|70","left":"var:preset|spacing|50","right":"var:preset|spacing|50"},"blockGap":"var:preset|spacing|50"}},"layout":{"type":"constrained","contentSize":"960px"}} -->
+<main class="wp-block-group fit-pal-dashboard fit-pal-meal-planner" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--70);padding-left:var(--wp--preset--spacing--50)">
 
-	<!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|60"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","orientation":"vertical"}} -->
-	<div class="wp-block-group" style="margin-bottom:var(--wp--preset--spacing--60)">
+	<!-- Intro (kept short — detail lives in each step) -->
+	<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group">
 		<!-- wp:paragraph {"style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.08em","fontWeight":"600"}},"textColor":"accent","fontSize":"small"} -->
 		<p class="has-accent-color has-text-color has-small-font-size" style="font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Meal Planner</p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:post-title {"level":1,"fontSize":"xx-large"} /-->
+		<!-- wp:heading {"level":1,"fontSize":"xx-large"} -->
+		<h1 class="wp-block-heading has-xx-large-font-size">Pinoy Fitness Meal Board</h1>
+		<!-- /wp:heading -->
 
 		<!-- wp:paragraph {"textColor":"contrast-muted"} -->
-		<p class="has-contrast-muted-color has-text-color">Your weekly dashboard for macros, recipes, and shopping lists. Drop interactive blocks or shortcodes into the panels below.</p>
+		<p class="has-contrast-muted-color has-text-color">Four steps: set your span, tune food macros, build the board, then cook &amp; shop.</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|50"}}}} -->
-	<div class="wp-block-columns">
-		<!-- wp:column {"width":"66.66%"} -->
-		<div class="wp-block-column" style="flex-basis:66.66%">
-			<!-- wp:group {"className":"fit-pal-dashboard__panel","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
-			<div class="wp-block-group fit-pal-dashboard__panel" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
-				<!-- wp:heading {"level":2,"fontSize":"large"} -->
-				<h2 class="wp-block-heading has-large-font-size">This week’s board</h2>
-				<!-- /wp:heading -->
+	<!-- Wizard shell — panels are shown one at a time via JS -->
+	<!-- wp:html -->
+	<div id="fit-pal-meal-planner-app" class="fit-pal-wizard" data-fit-pal-meal-planner>
 
-				<!-- wp:paragraph {"textColor":"contrast-muted","fontSize":"small"} -->
-				<p class="has-contrast-muted-color has-text-color has-small-font-size">Primary planner surface — place your meal board block, calendar, or app embed here.</p>
-				<!-- /wp:paragraph -->
+		<nav class="fit-pal-wizard__nav" aria-label="Meal planner steps">
+			<ol class="fit-pal-wizard__steps" role="list">
+				<li>
+					<button type="button" class="fit-pal-wizard__step is-active" data-step="1" aria-current="step">
+						<span class="fit-pal-wizard__step-num">1</span>
+						<span class="fit-pal-wizard__step-label">Plan</span>
+					</button>
+				</li>
+				<li>
+					<button type="button" class="fit-pal-wizard__step" data-step="2">
+						<span class="fit-pal-wizard__step-num">2</span>
+						<span class="fit-pal-wizard__step-label">Food macros</span>
+					</button>
+				</li>
+				<li>
+					<button type="button" class="fit-pal-wizard__step" data-step="3">
+						<span class="fit-pal-wizard__step-num">3</span>
+						<span class="fit-pal-wizard__step-label">Meal board</span>
+					</button>
+				</li>
+				<li>
+					<button type="button" class="fit-pal-wizard__step" data-step="4">
+						<span class="fit-pal-wizard__step-num">4</span>
+						<span class="fit-pal-wizard__step-label">Cook &amp; shop</span>
+					</button>
+				</li>
+			</ol>
+		</nav>
 
-				<!-- wp:spacer {"height":"280px"} -->
-				<div style="height:280px" aria-hidden="true" class="wp-block-spacer"></div>
-				<!-- /wp:spacer -->
+		<!-- Step 1: Plan setup -->
+		<section class="fit-pal-wizard__panel is-active" data-panel="1" aria-labelledby="step-1-title">
+			<header class="fit-pal-wizard__panel-header">
+				<h2 id="step-1-title" class="fit-pal-wizard__panel-title">Plan setup</h2>
+				<p class="fit-pal-wizard__panel-desc">Grocery span locks meal-plan length 1:1. Batch window only affects prep, not the full shopping list.</p>
+			</header>
 
-				<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
-			</div>
-			<!-- /wp:group -->
-		</div>
-		<!-- /wp:column -->
-
-		<!-- wp:column {"width":"33.33%"} -->
-		<div class="wp-block-column" style="flex-basis:33.33%">
-			<!-- wp:group {"className":"fit-pal-dashboard__panel","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"},"margin":{"bottom":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
-			<div class="wp-block-group fit-pal-dashboard__panel" style="margin-bottom:var(--wp--preset--spacing--50);padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
-				<!-- wp:heading {"level":3,"fontSize":"large"} -->
-				<h3 class="wp-block-heading has-large-font-size">Macro targets</h3>
-				<!-- /wp:heading -->
-
-				<!-- wp:paragraph {"textColor":"contrast-muted","fontSize":"small"} -->
-				<p class="has-contrast-muted-color has-text-color has-small-font-size">Protein / carbs / fats summary panel.</p>
-				<!-- /wp:paragraph -->
-
-				<!-- wp:spacer {"height":"120px"} -->
-				<div style="height:120px" aria-hidden="true" class="wp-block-spacer"></div>
-				<!-- /wp:spacer -->
-			</div>
-			<!-- /wp:group -->
-
-			<!-- wp:group {"className":"fit-pal-dashboard__panel","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->
-			<div class="wp-block-group fit-pal-dashboard__panel" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
-				<!-- wp:heading {"level":3,"fontSize":"large"} -->
-				<h3 class="wp-block-heading has-large-font-size">Shopping list</h3>
-				<!-- /wp:heading -->
-
-				<!-- wp:paragraph {"textColor":"contrast-muted","fontSize":"small"} -->
-				<p class="has-contrast-muted-color has-text-color has-small-font-size">WooCommerce-ready list or product shortcode region.</p>
-				<!-- /wp:paragraph -->
-
-				<!-- wp:spacer {"height":"120px"} -->
-				<div style="height:120px" aria-hidden="true" class="wp-block-spacer"></div>
-				<!-- /wp:spacer -->
-
-				<!-- wp:buttons -->
-				<div class="wp-block-buttons">
-					<!-- wp:button {"width":100} -->
-					<div class="wp-block-button has-custom-width wp-block-button__width-100"><a class="wp-block-button__link wp-element-button" href="/shop/">Go to shop</a></div>
-					<!-- /wp:button -->
+			<div class="fit-pal-dashboard__panel fit-pal-wizard__card">
+				<div class="fit-pal-control-bar" data-fit-pal-controls>
+					<div class="fit-pal-control-bar__field">
+						<label class="fit-pal-control-bar__label" for="fit-pal-grocery-span">Grocery &amp; Plan Span</label>
+						<select id="fit-pal-grocery-span" class="fit-pal-control-bar__select" name="grocery_span">
+							<option value="1">1 Week (7 days)</option>
+							<option value="2">2 Weeks (14 days)</option>
+							<option value="3">3 Weeks (21 days)</option>
+							<option value="4">4 Weeks (28 days)</option>
+						</select>
+					</div>
+					<div class="fit-pal-control-bar__field">
+						<label class="fit-pal-control-bar__label" for="fit-pal-batch-window">Batch Cooking Window</label>
+						<select id="fit-pal-batch-window" class="fit-pal-control-bar__select" name="batch_window">
+							<option value="2">Next 2 Days</option>
+							<option value="3" selected>Next 3 Days</option>
+							<option value="5">Next 5 Days</option>
+							<option value="7">Next 7 Days</option>
+						</select>
+					</div>
+					<div class="fit-pal-control-bar__meta" aria-live="polite">
+						<p class="fit-pal-control-bar__stat"><span class="fit-pal-control-bar__stat-label">Active plan</span> <strong id="fit-pal-plan-length">7 days</strong></p>
+					</div>
 				</div>
-				<!-- /wp:buttons -->
 			</div>
-			<!-- /wp:group -->
-		</div>
-		<!-- /wp:column -->
+
+			<div class="fit-pal-macro-meter fit-pal-macro-meter--compact" id="fit-pal-macro-meter" aria-live="polite">
+				<div class="fit-pal-dashboard__panel fit-pal-macro-card">
+					<p class="fit-pal-macro-card__eyebrow">Calories</p>
+					<p class="fit-pal-macro-card__actual"><span id="macro-actual-calories">0</span> kcal</p>
+					<p class="fit-pal-macro-card__target">Target <span id="macro-target-calories">2200</span></p>
+					<div class="fit-pal-macro-card__bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+						<span class="fit-pal-macro-card__bar-fill" id="macro-bar-calories"></span>
+					</div>
+				</div>
+				<div class="fit-pal-dashboard__panel fit-pal-macro-card">
+					<p class="fit-pal-macro-card__eyebrow">Protein</p>
+					<p class="fit-pal-macro-card__actual"><span id="macro-actual-protein">0</span> g</p>
+					<p class="fit-pal-macro-card__target">Target <span id="macro-target-protein">180</span> g</p>
+					<div class="fit-pal-macro-card__bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+						<span class="fit-pal-macro-card__bar-fill" id="macro-bar-protein"></span>
+					</div>
+				</div>
+				<div class="fit-pal-dashboard__panel fit-pal-macro-card">
+					<p class="fit-pal-macro-card__eyebrow">Carbs</p>
+					<p class="fit-pal-macro-card__actual"><span id="macro-actual-carbs">0</span> g</p>
+					<p class="fit-pal-macro-card__target">Target <span id="macro-target-carbs">220</span> g</p>
+					<div class="fit-pal-macro-card__bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+						<span class="fit-pal-macro-card__bar-fill" id="macro-bar-carbs"></span>
+					</div>
+				</div>
+				<div class="fit-pal-dashboard__panel fit-pal-macro-card">
+					<p class="fit-pal-macro-card__eyebrow">Fats</p>
+					<p class="fit-pal-macro-card__actual"><span id="macro-actual-fats">0</span> g</p>
+					<p class="fit-pal-macro-card__target">Target <span id="macro-target-fats">65</span> g</p>
+					<div class="fit-pal-macro-card__bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+						<span class="fit-pal-macro-card__bar-fill" id="macro-bar-fats"></span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Step 2: Editable food macros -->
+		<section class="fit-pal-wizard__panel" data-panel="2" hidden aria-labelledby="step-2-title">
+			<header class="fit-pal-wizard__panel-header">
+				<h2 id="step-2-title" class="fit-pal-wizard__panel-title">Food macros</h2>
+				<p class="fit-pal-wizard__panel-desc">Override per-100g values from your product labels. Changes recalculate the board, batch prep, and grocery macros.</p>
+			</header>
+			<div id="food-macros-editor" class="fit-pal-food-macros" data-fit-pal-food-macros></div>
+		</section>
+
+		<!-- Step 3: Meal board -->
+		<section class="fit-pal-wizard__panel" data-panel="3" hidden aria-labelledby="step-3-title">
+			<header class="fit-pal-wizard__panel-header">
+				<h2 id="step-3-title" class="fit-pal-wizard__panel-title">Meal board</h2>
+				<p class="fit-pal-wizard__panel-desc">Swap proteins per meal. Macros stay matched by scaling raw weight.</p>
+			</header>
+			<div id="meal-plan-board" class="fit-pal-meal-board" data-fit-pal-meal-board aria-live="polite">
+				<p class="fit-pal-meal-board__loading">Loading meal plan…</p>
+			</div>
+		</section>
+
+		<!-- Step 4: Cook & shop -->
+		<section class="fit-pal-wizard__panel" data-panel="4" hidden aria-labelledby="step-4-title">
+			<header class="fit-pal-wizard__panel-header">
+				<h2 id="step-4-title" class="fit-pal-wizard__panel-title">Cook &amp; shop</h2>
+				<p class="fit-pal-wizard__panel-desc">Batch recipes + raw weights for your cooking window, then the full-plan palengke list.</p>
+			</header>
+
+			<div class="fit-pal-cook-shop">
+				<div class="fit-pal-dashboard__panel fit-pal-wizard__card">
+					<h3 class="fit-pal-wizard__card-title">Batch cooking</h3>
+					<div id="batch-cooking-output" class="fit-pal-batch-output" data-fit-pal-batch-output aria-live="polite">
+						<p class="fit-pal-batch-output__empty">Loading prep session…</p>
+					</div>
+				</div>
+				<div class="fit-pal-dashboard__panel fit-pal-wizard__card">
+					<h3 class="fit-pal-wizard__card-title">Palengke grocery list</h3>
+					<div id="grocery-list-container" class="fit-pal-grocery" data-fit-pal-grocery aria-live="polite">
+						<p class="fit-pal-grocery__empty">Building shopping list…</p>
+					</div>
+					<p class="fit-pal-wizard__shop-link"><a href="/shop/">Shop Fit Pal staples →</a></p>
+				</div>
+			</div>
+		</section>
+
+		<footer class="fit-pal-wizard__footer">
+			<button type="button" class="fit-pal-wizard__btn fit-pal-wizard__btn--ghost" id="fit-pal-step-prev" disabled>Back</button>
+			<button type="button" class="fit-pal-wizard__btn fit-pal-wizard__btn--primary" id="fit-pal-step-next">Continue</button>
+		</footer>
 	</div>
-	<!-- /wp:columns -->
+	<!-- /wp:html -->
+
+	<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
 
 </main>
 <!-- /wp:group -->

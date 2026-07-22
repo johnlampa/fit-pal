@@ -107,3 +107,56 @@ function fit_pal_enqueue_ghl_assets() {
 	wp_enqueue_script( 'fit-pal-ghl' );
 }
 add_action( 'wp_enqueue_scripts', 'fit_pal_enqueue_ghl_assets' );
+
+/**
+ * Whether the current request is the Meal Planner dashboard template.
+ *
+ * Supports FSE custom template slug `page-meal-planner` (theme.json) and
+ * the conventional /meal-planner/ page slug as a fallback.
+ *
+ * @return bool
+ */
+function fit_pal_is_meal_planner_page() {
+	if ( ! is_singular( 'page' ) ) {
+		return false;
+	}
+
+	$template_slug = get_page_template_slug();
+
+	if ( is_string( $template_slug ) && '' !== $template_slug ) {
+		$normalized = str_replace( array( 'templates/', '.html' ), '', $template_slug );
+		if ( 'page-meal-planner' === $normalized || 'page-meal-planner' === $template_slug ) {
+			return true;
+		}
+	}
+
+	if ( is_page_template( 'page-meal-planner' ) || is_page_template( 'templates/page-meal-planner.html' ) ) {
+		return true;
+	}
+
+	return is_page( 'meal-planner' );
+}
+
+/**
+ * Enqueues the Meal Planner engine on the page-meal-planner template only.
+ */
+function fit_pal_enqueue_meal_planner() {
+	if ( ! fit_pal_is_meal_planner_page() ) {
+		return;
+	}
+
+	$script_path = FIT_PAL_DIR . '/assets/js/meal-planner.js';
+
+	if ( ! file_exists( $script_path ) ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'fit-pal-meal-planner',
+		FIT_PAL_URI . '/assets/js/meal-planner.js',
+		array(),
+		FIT_PAL_VERSION,
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'fit_pal_enqueue_meal_planner' );
